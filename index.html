@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+   <div id="app">
+      <div class="header">
+         <h1>Boite de réception</h1>
+         <button type="button" id="refresh" @click="refreshEmails">
+            <span v-if="isRefreshing">Acutalisation en cours...</span>
+            <span v-else>Actualiser</span>
+         </button>
+      </div>
+      <p class="total">Vous avez en total <strong>{{result.length}}</strong> email</p>
+      <div v-if="loading">Loading emails</div>
+      <div v-else class="emails">
+         <div v-for="email in result" :key="email.id" class="card">
+            <h5>{{email.name}}</h5>
+            <p>{{email.email}}</p>
+            <p>{{email.subject}}</p>
+            <p>{{email.content}}</p>
+         </div>
+      </div>
+   </div>
+
+
+
+
+   <script src="https://unpkg.com/vue@3"></script>
+   <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.header{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   flex-wrap: wrap;
+}
+@media (max-width:375px) {
+   .header{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+   }
+   
+}
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+}
+button{
+   background-color: #1a73e8;
+   color: white;
+   border: none;
+   outline: transparent;
+   padding: 12px 16px;
+   border-radius: 8px;
+   cursor: pointer;
+}
+button:hover{
+   background-color: #103a71;
+   transition: .5s;
+}
+.total{
+   margin-block:12px ;
+   /* padding: 12px; */
+}
+.emails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 100%));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h5 {
+  color: #1a73e8;
+  font-size: 1.2rem;
+  margin: 0 0 10px 0;
+}
+
+.card p {
+  color: #5f6368;
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+.card p:nth-child(2) {
+  color: #1a73e8;
+  font-size: 0.9rem;
+}
+
+.card p:nth-child(3) {
+  font-weight: bold;
+}
+
+[v-if="loading"] {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  padding: 40px;
+}
