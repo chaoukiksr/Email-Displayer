@@ -1,47 +1,35 @@
 import express from 'express';
 import cors from 'cors';
 const PORT = 5000;
-
+import mongoose from 'mongoose';
+import 'dotenv/config'
 const app = express();
 app.use(cors())
-let result =  [{
-   id:1,
-   name:"Chaouki",
-   email:"kessourichaouki@gmail.com",
-   subject:"Web dev",
-   content:"hello, i'm very intersed, i want to do this and this hello, i'm very intersed, i want to do this and thishello, i'm very intersed, i want to do this and thishello, i'm very intersed, i want to do this and thishello, i'm very intersed, i want to do this and thishello, i'm very intersed, i want to do this and thishello, i'm very intersed, i want to do this and this"
-         }, {
-      id: 1,
-      name: "Chaouki",
-      email: "kessourichaouki@gmail.com",
-      subject: "Web dev",
-      content: "hello, i'm very intersed, i want to do this and this"
-            }, {
-      id: 1,
-      name: "Chaouki",
-      email: "kessourichaouki@gmail.com",
-      subject: "Web dev",
-      content: "hello, i'm very intersed, i want to do this and this"
-            }, {
-      id: 1,
-      name: "Chaouki",
-      email: "kessourichaouki@gmail.com",
-      subject: "Web dev",
-      content: "hello, i'm very intersed, i want to do this and this"
-            }, {
-      id:1,
-      name:"Chaouki",
-      email:"kessourichaouki@gmail.com",
-      subject:"Web dev",
-      content:"hello, i'm very intersed, i want to do this and this"
-         }]
-app.get('/displayAll',(req,res)=>{
+const mongoDBURI = process.env.DB_URI
+
+mongoose.connect(mongoDBURI,{}).then(()=>console.log('connected')).catch(err=>console.log(err))
+const MessageSchema = new mongoose.Schema({
+   id:String,
+   email:String,
+   name:String,
+   message:String,
+   sujet:String,
+   createdAt:Date,
+   updatedAt:Date
+});
+
+const Message = mongoose.model('Message',MessageSchema);
+
+
+app.get('/displayAll',async (req,res)=>{
    try {
-      console.log('all messages are displayed')
+      console.log('all messages are displayed');
+      const messages = await Message.find({});
+      console.log(messages);
       res.status(200).json({
          success: true,
          message: "all emails are retrieved",
-         result:result
+         result:messages
       })
    } catch (error) {
       console.log(error)
@@ -49,6 +37,8 @@ app.get('/displayAll',(req,res)=>{
          success: false,
          message: "Server error"
       })
+   }finally{
+      await mongoose.connection.close();
    }
 })
 
