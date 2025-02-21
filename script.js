@@ -28,6 +28,15 @@ createApp({
       async refreshEmails(){
          this.isRefreshing=true;
          await this.fetchEmails();
+      },
+      formatDate(dateString) {
+         return new Date(dateString).toLocaleString('fr-FR', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+         });
       }
    },
    async created(){

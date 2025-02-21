@@ -49,48 +49,90 @@ button:hover{
    /* padding: 12px; */
 }
 .emails {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 100%));
-  gap: 20px;
-  padding: 20px;
+   display: grid;
+   grid-template-columns: 1fr;  /* This ensures one column at full width */
+   gap: 1rem;
+   padding: 1rem;
+   max-width: 1200px;
+   margin: 0 auto;
 }
 
+
+
 .card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  transition: transform 0.2s;
+   background: white;
+   border-radius: 8px;
+   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+   transition: transform 0.2s ease;
+   overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+   transform: translateY(-2px);
+   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.card h5 {
-  color: #1a73e8;
-  font-size: 1.2rem;
-  margin: 0 0 10px 0;
+.card-header {
+   padding: 1rem;
+   background: #f8f9fa;
+   border-bottom: 1px solid #e9ecef;
 }
 
-.card p {
-  color: #5f6368;
-  margin: 8px 0;
-  line-height: 1.4;
+.sender-info {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 0.5rem;
 }
 
-.card p:nth-child(2) {
-  color: #1a73e8;
-  font-size: 0.9rem;
+.name {
+   margin: 0;
+   color: #1a73e8;
+   font-size: 1.1rem;
+   font-weight: 600;
 }
 
-.card p:nth-child(3) {
-  font-weight: bold;
+.date {
+   color: #6c757d;
+   font-size: 0.9rem;
 }
 
-[v-if="loading"] {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #666;
-  padding: 40px;
+.email-address {
+   color: #495057;
+   font-size: 0.9rem;
+}
+
+.card-body {
+   padding: 1rem;
+}
+
+.subject {
+   margin: 0 0 0.75rem 0;
+   color: #212529;
+   font-size: 1rem;
+   font-weight: 600;
+}
+
+.message {
+   margin: 0;
+   color: #495057;
+   line-height: 1.5;
+   font-size: 0.95rem;
+}
+
+
+/* Animation for new emails */
+@keyframes slideIn {
+   from {
+      opacity: 0;
+      transform: translateY(20px);
+   }
+   to {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
+
+.card {
+   animation: slideIn 0.3s ease-out;
 }

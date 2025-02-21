@@ -18,14 +18,21 @@
       </div>
       <p class="total">Vous avez en total <strong>{{result.length}}</strong> email</p>
       <div v-if="loading">Loading emails</div>
-      <div v-else class="emails">
-         <div v-for="email in result" :key="email.id" class="card">
-            <h5>{{email.name}}</h5>
-            <p>{{email.email}}</p>
-            <p>{{email.subject}}</p>
-            <p>{{email.content}}</p>
+   <div v-else class="emails">
+      <div v-for="email in result" :key="email.id" class="card">
+         <div class="card-header">
+            <div class="sender-info">
+               <h5 class="name">{{email.name}}</h5>
+               <span class="date">{{formatDate(email.createdAt)}}</span>
+            </div>
+            <div class="email-address">{{email.email}}</div>
+         </div>
+         <div class="card-body">
+            <h6 class="subject">{{email.sujet}}</h6>
+            <p class="message">{{email.message}}</p>
          </div>
       </div>
+   </div>
    </div>
 
 

@@ -7,21 +7,22 @@ const app = express();
 app.use(cors())
 const mongoDBURI = process.env.DB_URI
 
-mongoose.connect(mongoDBURI,{}).then(()=>console.log('connected')).catch(err=>console.log(err))
+mongoose.connect(mongoDBURI, {}).then(() => console.log('connected')).catch(err => console.log(err))
+
 const MessageSchema = new mongoose.Schema({
-   id:String,
-   email:String,
-   name:String,
-   message:String,
-   sujet:String,
-   createdAt:Date,
-   updatedAt:Date
-});
+   _id: String,
+   email: String,
+   name: String,
+   message: String,
+   sujet: String,
+   createdAt: Date,
+   updatedAt: Date
+},{strict:false});
 
-const Message = mongoose.model('Message',MessageSchema);
+const Message = mongoose.model('Message', MessageSchema, 'Message');
 
 
-app.get('/displayAll',async (req,res)=>{
+app.get('/displayAll', async (req, res) => {
    try {
       console.log('all messages are displayed');
       const messages = await Message.find({});
@@ -29,7 +30,7 @@ app.get('/displayAll',async (req,res)=>{
       res.status(200).json({
          success: true,
          message: "all emails are retrieved",
-         result:messages
+         result: messages
       })
    } catch (error) {
       console.log(error)
@@ -37,11 +38,9 @@ app.get('/displayAll',async (req,res)=>{
          success: false,
          message: "Server error"
       })
-   }finally{
-      await mongoose.connection.close();
    }
 })
 
-app.listen(PORT, (req,res)=>{
+app.listen(PORT, (req, res) => {
    console.log("you are on the server")
 })
