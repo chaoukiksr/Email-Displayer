@@ -1,44 +1,89 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>Email Displayer</title>
    <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
-<body>
-  
-   <div id="app">
-      <div class="header">
-         <h1>Boite de réception</h1>
-         <button type="button" id="refresh" @click="refreshEmails">
-            <span v-if="isRefreshing">Acutalisation en cours...</span>
-            <span v-else>Actualiser</span>
-         </button>
+
+<body class="bg-light">
+   <nav class="navbar navbar-expand-sm ">
+      <div class="container">
+         <a class="navbar-brand" href="#"><img src="Frame 7 (1).svg" alt="Logo"></a>
       </div>
-      <p class="total">Vous avez en total <strong>{{result.length}}</strong> email</p>
-      <div v-if="loading">Loading emails</div>
+   </nav>
+
+   <div id="app" class="container">
+      <div class="row mb-4">
+         <div class="col">
+            <h3 class="text-dark fw-bold">Boite de réception</h3>
+         </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+         <div class="card-body d-flex justify-content-between align-items-center">
+            <p class="mb-0">
+               Vous avez en total
+               <span class="badge bg-primary rounded-pill ms-2">
+                  {{result.length}} email(s)
+               </span>
+            </p>
+            <button @click="refreshEmails" class="btn btn-primary d-flex align-items-center">
+               <span v-if="isRefreshing" class="spinner-border spinner-border-sm me-2"></span>
+               <span v-if="isRefreshing">Actualisation en cours...</span>
+               <span v-else>
+                  <i class="fas fa-sync-alt me-2"></i>Actualiser
+               </span>
+            </button>
+         </div>
+      </div>
+
+      <div v-if="loading" class="text-center py-5">
+         <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+         </div>
+      </div>
+
    <div v-else class="emails">
-      <div v-for="email in result" :key="email.id" class="card">
-         <div class="card-header">
-            <div class="sender-info">
-               <h5 class="name">{{email.name}}</h5>
-               <span class="date">{{formatDate(email.createdAt)}}</span>
+      <div v-for="email in result" :key="email.id" class="card mb-3 ">
+         <div class="card-header cursor-pointer" @click="email.isExpanded = !email.isExpanded">
+            <div class="row align-items-center">
+               <div class="col">
+                  <div class="d-flex align-items-center">
+                     <div class="avatar-circle bg-primary text-white me-3">
+                        {{email.name.charAt(0).toUpperCase()}}
+                     </div>
+                     <div>
+                        <h5 class="card-title text-primary mb-0">{{email.name}}</h5>
+                        <small class="text-muted">{{email.email}}</small>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-auto d-flex align-items-center">
+                  <small class="text-muted me-3">{{formatDate(email.createdAt)}}</small>
+               </div>
             </div>
-            <div class="email-address">{{email.email}}</div>
          </div>
-         <div class="card-body">
-            <h6 class="subject">{{email.sujet}}</h6>
-            <p class="message">{{email.message}}</p>
+         <div v-show="email.isExpanded" class="card-body" style="transition: all 0.3s ease">
+            <h6 class="card-subtitle mb-3 text-dark">
+               <i class="fas fa-envelope-open me-2 text-primary"></i>
+               {{email.sujet}}
+            </h6>
+            <p class="card-text text-secondary ps-4">{{email.message}}</p>
          </div>
       </div>
    </div>
    </div>
 
-
-
-
+   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
    <script src="https://unpkg.com/vue@3"></script>
    <script src="script.js"></script>
+   <!-- Add Font Awesome for icons -->
+   <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

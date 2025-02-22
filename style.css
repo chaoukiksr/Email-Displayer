@@ -5,10 +5,11 @@ body {
   padding: 20px;
 }
 
-#app {
+#app,nav {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .header{
    display: flex;
    flex-direction: row;
@@ -59,24 +60,8 @@ button:hover{
 
 
 
-.card {
-   background: white;
-   border-radius: 8px;
-   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-   transition: transform 0.2s ease;
-   overflow: hidden;
-}
 
-.card:hover {
-   transform: translateY(-2px);
-   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
 
-.card-header {
-   padding: 1rem;
-   background: #f8f9fa;
-   border-bottom: 1px solid #e9ecef;
-}
 
 .sender-info {
    display: flex;
@@ -135,4 +120,41 @@ button:hover{
 
 .card {
    animation: slideIn 0.3s ease-out;
+}
+
+
+.cursor-pointer {
+   cursor: pointer;
+}
+
+.avatar-circle {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-weight: bold;
+   font-size: 1.2rem;
+}
+
+.card {
+   border: none;
+   transition: all 0.3s ease;
+}
+
+.card:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.card-header {
+   border-bottom: none;
+   padding: 1rem;
+}
+
+
+.card-body {
+   padding: 1.25rem;
+   border-top: 1px solid rgba(0,0,0,.125);
 }

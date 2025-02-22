@@ -1,7 +1,6 @@
 const {createApp} = Vue;
 createApp({
    data(){
-
       return {
          result:[], // this array will hold the fetched items
          loading:true,
@@ -17,7 +16,10 @@ createApp({
             })
             let data = await response.json()
             let result = data.result
-            this.result = result
+            this.result = result.map(email => ({
+               ...email,
+               isExpanded: false
+            }));
          } catch (error) {
             console.error('error fetching the data', error)
          } finally {
